@@ -1,10 +1,39 @@
 .filter{
     padding: 0px 10px;
+    position: relative;
 }
 .icon{
     font-size: 20px;
 }
+.active,
 .icon:hover{
     cursor: pointer;
     font-size: 30px;
+}
+.list{
+    color: #104e8b;
+    background-color: #e9f0f7;
+    width: 20vh;
+    height: 20vh;
+    position: absolute;
+    right: 10px;
+    bottom: 50px;
+    border-radius: 20px;
+    padding: 10px;
+    font-weight: 800;
+}
+
+.list-column{
+    padding-left: 10px;
+}
+.list-order{
+    padding-left: 10px;
+}
+.checkbox{
+    width: 20px;
+    height: 20px;
+    margin: 0px 15px;
+}
+.checkbox:hover{
+    cursor: pointer;
 }
