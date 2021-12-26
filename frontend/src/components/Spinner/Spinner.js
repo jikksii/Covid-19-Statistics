@@ -1,6 +1,7 @@
+import styles from './Spinner.module.css'
 const Spinner = () =>{
     return (
-        <div>Spinner....</div>
+        <div className={styles.spinner}>Spinner....</div>
     )
 }
 export default Spinner;
