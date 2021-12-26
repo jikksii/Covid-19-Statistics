@@ -11,10 +11,10 @@
     font-size: 30px;
 }
 .list{
-    color: #104e8b;
+    color: #56579f;
     background-color: #e9f0f7;
-    width: 20vh;
-    height: 20vh;
+    width: 25vh;
+    height: 25vh;
     position: absolute;
     right: 10px;
     bottom: 50px;
@@ -37,3 +37,10 @@
 .checkbox:hover{
     cursor: pointer;
 }
+
+@media only screen and (max-width: 1020px) {
+    .list{
+        right: 50px;
+        bottom: 10px;
+    }
+ }

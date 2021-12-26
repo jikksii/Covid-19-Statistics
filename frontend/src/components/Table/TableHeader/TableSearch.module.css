@@ -3,7 +3,7 @@
     padding: 10px 40px;
     border-radius: 50px;
     display: flex;
-    color: #104e8b;
+    color: #9b7a9e;
 
 }
 .search:hover{
@@ -13,7 +13,7 @@
 .input{
     border: none;
     font-size: 16px;
-    color: #104e8b;
+    color: #9b7a9e;
     background-color: transparent;
     font-weight: 700;
 }

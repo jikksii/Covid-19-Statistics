@@ -5,9 +5,10 @@
     background-color: #e9f0f7;
     min-height: 500px;
     border-radius: 50px;
+    box-shadow:6px 7.4px 8px #30826b3b
 }
 .columns{
-    background-color: #104e8b;
+    background-color: rgba(158, 134, 164, 0.71);
     padding: 20px;
     color: #fff;
 }
@@ -16,4 +17,9 @@ td, th {
     border: 1px solid #dddddd;
     text-align: left;
     padding: 8px;
+}
+
+tbody{
+    color: #704a70;
+    font-weight: 600;
 }
