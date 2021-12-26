@@ -19,6 +19,7 @@
 .controller-auth{   
     margin-right:20px;
     font-size: 26px;
+    color: #987a9d;
 }
 .controller-auth:hover{
     cursor: pointer;
