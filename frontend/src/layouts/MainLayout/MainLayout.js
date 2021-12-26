@@ -6,6 +6,7 @@ import styles from './MainLayout.module.css'
 
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
+import LanguageSelector from "../../components/LanguageSelector/LanguageSelector";
 const MainLayout = ({children}) => {
     
     const handleFetchTestData = data =>{
@@ -30,6 +31,7 @@ const MainLayout = ({children}) => {
             {isFetchingTestData && <Spinner/>}
             {!isFetchingTestData && 
             <div className={styles.controller}>
+                <LanguageSelector/>
                 <FontAwesomeIcon className={styles['controller-auth']} icon={faSignOutAlt} onClick={handleLogOut} />
             </div>}
             {!isFetchingTestData &&<Header />}
