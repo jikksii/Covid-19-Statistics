@@ -1,0 +1,11 @@
+.MainLayout{
+    background-color: rgb(208, 214, 214);
+    min-height: 100vh;
+}
+
+.Loading{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

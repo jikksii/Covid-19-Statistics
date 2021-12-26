@@ -1,7 +1,8 @@
 import { useEffect } from "react";
-import Header from "../components/Header/Header";
-import useHttp from "../hooks/use-http";
-
+import Header from "../../components/Header/Header";
+import Spinner from "../../components/Spinner/Spinner";
+import useHttp from "../../hooks/use-http";
+import styles from './MainLayout.module.css'
 const MainLayout = ({children}) => {
     
     const handleFetchTestData = data =>{
@@ -18,8 +19,8 @@ const MainLayout = ({children}) => {
     },[])
 
     return (
-        <div>
-            {isFetchingTestData && <div>Loading....</div>}
+        <div className={`${styles.MainLayout} ${isFetchingTestData && styles.Loading}` }>
+            {isFetchingTestData && <Spinner/>}
             {!isFetchingTestData &&<Header />}
             {!isFetchingTestData && children}
         </div>
