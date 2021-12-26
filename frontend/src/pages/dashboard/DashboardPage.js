@@ -1,7 +1,8 @@
+import Table from '../../components/Table/Table';
 import styles from './DashboardPage.module.css'
 const DashboardPage = () =>{
     return <div className={styles.dashboard}>
-        <div className='table'>Table</div>
+        <Table/>
         <div className='cards'>Cards</div>
     </div>
 }
