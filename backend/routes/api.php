@@ -14,6 +14,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/test',function(){
+    sleep(0.5);
+    return [
+        "data" => [
+            "array" => [1,2,3,4,5,6,7],
+            "name" => 'giorgijikia'
+        ]
+    ];
+});
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
