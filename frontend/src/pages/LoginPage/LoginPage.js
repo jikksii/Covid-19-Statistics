@@ -8,6 +8,9 @@ const LoginPage = (props)=>{
             <div className={styles['login-card-header']}>
                 <h1>Covid 19 statistics</h1>
             </div>
+            <div className={styles['error-message']}>
+                მომხმარებლის სახელი ან პაროლი არასწორია.
+            </div>
             <Input className={styles['login-input']} type={"text"} icon={faUser} onChange={(event)=>console.log(event.target.value)} placeholder={"Username"}/>
             <Input className={styles['login-input']} type={"Password"} icon={faKey} onChange={(event)=>console.log(event.target.value)} placeholder={"Password"}/>
             <div className={styles['login-action-container']}>
