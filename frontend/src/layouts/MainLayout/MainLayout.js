@@ -7,24 +7,39 @@ import styles from './MainLayout.module.css'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 import LanguageSelector from "../../components/LanguageSelector/LanguageSelector";
+import { useNavigate } from "react-router-dom";
 const MainLayout = ({children}) => {
+
+    const navigate = useNavigate();
     
     const handleFetchTestData = data =>{
         console.log(data);
     }
+
+    const handleError = () => {
+        
+    }
+
+    const handleLogOutRequest = () => {
+        navigate('/login')
+    }
+
     const {
         sendRequest: getTestData,
-        error : errorFetchingTestData,
         isLoading : isFetchingTestData
-    } = useHttp({url : "/test",},handleFetchTestData)
+    } = useHttp({url : "/test",},handleFetchTestData,handleError)
+    
+    const {
+        sendRequest: LogoutRequest,
+    } = useHttp({
+        method : 'POST',
+        url : "/test",
+    },handleLogOutRequest,handleError)
     
     useEffect(() =>{
         getTestData()
     },[])
 
-    const handleLogOut = () => {
-        console.log("Log out");
-    }
 
     return (
         <div className={`${styles.MainLayout} ${isFetchingTestData && styles.Loading}` }>
@@ -32,7 +47,7 @@ const MainLayout = ({children}) => {
             {!isFetchingTestData && 
             <div className={styles.controller}>
                 <LanguageSelector/>
-                <FontAwesomeIcon className={styles['controller-auth']} icon={faSignOutAlt} onClick={handleLogOut} />
+                <FontAwesomeIcon className={styles['controller-auth']} icon={faSignOutAlt} onClick={LogoutRequest} />
             </div>}
             {!isFetchingTestData &&<Header />}
             {!isFetchingTestData && children}
