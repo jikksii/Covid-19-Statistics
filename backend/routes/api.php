@@ -23,6 +23,11 @@ Route::get('/test',function(){
         ]
     ];
 });
+Route::post('/test',function(){
+    return [
+        "token" => "testtoken"
+    ];
+});
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
