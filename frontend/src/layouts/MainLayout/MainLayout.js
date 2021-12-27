@@ -8,9 +8,14 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 import LanguageSelector from "../../components/LanguageSelector/LanguageSelector";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { authActions } from "../../store/auth";
+
+
 const MainLayout = ({children}) => {
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     
     const handleFetchTestData = data =>{
         console.log(data);
@@ -21,6 +26,7 @@ const MainLayout = ({children}) => {
     }
 
     const handleLogOutRequest = () => {
+        dispatch(authActions.setAuth(false));
         navigate('/login')
     }
 

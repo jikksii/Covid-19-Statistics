@@ -9,10 +9,10 @@ const slice = createSlice({
     initialState,
     reducers :{
         setAuth(state,action){
-            state.isAuth = action.isAuth
+            state.isAuth = action.payload
         },
         setToken(state,action){
-            state.token = action.token
+            state.token = action.payload
         }
     }
 })

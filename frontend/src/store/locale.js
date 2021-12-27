@@ -8,10 +8,10 @@ const slice = createSlice({
     initialState,
     reducers :{
         setActive(state,action){
-            state.active = state.all[action.key]
+            state.active = state.all[action.payload]
         },
         setAll(state,action){
-            state.all = action.locales
+            state.all = action.payload
         }
     }
 })

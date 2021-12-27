@@ -4,23 +4,27 @@ import { faUser, faKey } from '@fortawesome/free-solid-svg-icons'
 import { useEffect, useState } from 'react';
 import useHttp from '../../hooks/use-http';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import {authActions} from '../../store/auth'
 const LoginPage = (props)=>{
     const [error,setError] = useState(false);
     const [errorMessage,setErrorMessage] = useState('Username or password is incorrect');
     const [username,setUsername] = useState('');
     const [password,setPassword] = useState('');
     const navigate = useNavigate();
+    const isAuth = useSelector(state => state.auth.isAuth)
+    const dispatch = useDispatch()
 
 
     useEffect(() => {
-        let isAuth  = false;
         if(isAuth){
             navigate('/')
         }
-    },[])
+    },[isAuth])
 
     const handleSuccessAuth = data =>{
-        navigate('/');
+        dispatch(authActions.setAuth(true))
+        dispatch(authActions.setToken(data.token))
     }
 
     const handleError = (error) => {
