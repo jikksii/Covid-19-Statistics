@@ -1,0 +1,29 @@
+.input-container{
+    display: flex;
+    flex-direction: row;
+    padding: 10px 30px;
+    background-color: darkgray;
+    border-radius: 20px;
+    justify-content: center;
+    width: fit-content;
+}
+.input{
+    background-color: transparent;
+    outline: none;
+    border:none;
+    color: white;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.input:-webkit-autofill,
+.input:-webkit-autofill:hover, 
+.input:-webkit-autofill:focus, 
+.input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px darkgray inset !important;
+}
+
+.icon-container{
+    margin: 0px 3px;
+    color: white;
+}
