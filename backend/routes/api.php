@@ -3,7 +3,7 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\LiteralController;
 use App\Http\Controllers\Api\StatisticController;
-use Illuminate\Http\Request;
+use App\Http\ExternalApi\CovidApi;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,6 +31,18 @@ Route::post('/test',function(){
         "token" => "testtoken"
     ];
 });
+
+
+Route::get('/test/countries',function(){
+    $covidApi = new CovidApi();
+    dd($covidApi->getAllCountries());
+});
+
+Route::get('/test/country',function(){
+    $covidApi = new CovidApi();
+    dd($covidApi->getCountryStatistic("AF"));
+});
+
 
 Route::post('/login',[AuthController::class,'logIn']);
 
