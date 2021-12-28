@@ -38,8 +38,8 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::put('/logout',[AuthController::class,'logOut']);
 
 
-    Route::prefix('statistic')->group(function(){
-        Route::get('all',[StatisticController::class,'all']);
-        Route::get('summary',[StatisticController::class,'summary']);
+    Route::prefix('/statistic')->group(function(){
+        Route::get('/all',[StatisticController::class,'all']);
+        Route::get('/summary',[StatisticController::class,'summary']);
     });
 });
