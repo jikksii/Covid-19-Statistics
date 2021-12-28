@@ -45,9 +45,9 @@ Route::get('/test/country',function(){
 
 
 Route::post('/login',[AuthController::class,'logIn']);
-
+Route::post('/register',[AuthController::class,'register']);
 Route::middleware('auth:sanctum')->group(function(){
-    Route::post('/register',[AuthController::class,'register']);
+    
     Route::put('/logout',[AuthController::class,'logOut']);
 
 
