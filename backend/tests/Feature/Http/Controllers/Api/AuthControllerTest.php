@@ -89,7 +89,7 @@ class AuthControllerTest extends TestCase
         ],[
             'Accept' => 'application/json',
         ]);
-        $response->assertStatus(204);
+        $response->assertStatus(200);
 
     }
 }

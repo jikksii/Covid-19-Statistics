@@ -7,7 +7,12 @@ namespace App\Http\Traits;
  */
 trait ResponseTrait
 {
-    public function responseCreatedSuccessfully(){
+    public function responseCreatedSuccessfully($data = null){
+        if($data){
+            return response()->json([
+                "data" => $data
+            ],201);
+        }
         return response()->json([],201);
     }
 
