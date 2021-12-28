@@ -3,7 +3,7 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\LiteralController;
 use App\Http\Controllers\Api\StatisticController;
-use App\Http\ExternalApi\CovidApi;
+use App\Http\Api\CovidApi;
 use Illuminate\Support\Facades\Route;
 
 /*

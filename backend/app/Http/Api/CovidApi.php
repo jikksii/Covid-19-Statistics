@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\ExternalApi;
+namespace App\Http\Api;
 
 use Exception;
 use GuzzleHttp\Client;
