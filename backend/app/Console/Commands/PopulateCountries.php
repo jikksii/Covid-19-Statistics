@@ -22,7 +22,7 @@ class PopulateCountries extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Populates countries';
 
     /**
      * Create a new command instance.

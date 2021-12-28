@@ -22,4 +22,9 @@ class Country extends Model
      * @var array
      */
     protected $fillable = ['code','name'];
+
+
+    public function statistic(){
+        return $this->hasOne(Statistic::class);
+    }
 }
