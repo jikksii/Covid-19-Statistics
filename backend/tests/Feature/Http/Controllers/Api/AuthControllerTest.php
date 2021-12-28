@@ -8,6 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\Sanctum;
+use Nette\Utils\Random;
 use Tests\TestCase;
 
 class AuthControllerTest extends TestCase
@@ -55,6 +56,15 @@ class AuthControllerTest extends TestCase
             "username" => "giorgi"
         ]);
     }
+
+    public function test_log_out_auth_protected(){
+        $response = $this->put('api/logout',[],[
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer '. Random::generate(20)
+        ]);
+        $response->assertUnauthorized(204);
+    }
+
 
     public function test_can_log_out(){
         $user = User::factory()->create();
