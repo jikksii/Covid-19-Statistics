@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\StatisticController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -35,4 +36,10 @@ Route::post('/login',[AuthController::class,'logIn']);
 Route::middleware('auth:sanctum')->group(function(){
     Route::post('/register',[AuthController::class,'register']);
     Route::put('/logout',[AuthController::class,'logOut']);
+
+
+    Route::prefix('statistic')->group(function(){
+        Route::get('all',[StatisticController::class,'all']);
+        Route::get('summary',[StatisticController::class,'summary']);
+    });
 });
