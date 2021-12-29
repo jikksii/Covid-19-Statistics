@@ -79,7 +79,12 @@ const DashboardPage = () =>{
 
 
     return <div className={styles.dashboard}>
-        <Table list = {tableData} onSortChange = {sortChangeHandler} onSearchQueryChange = {searchQueryChangeHandler}/>
+        <Table 
+            list = {tableData} 
+            onSortChange = {sortChangeHandler} 
+            onSearchQueryChange = {searchQueryChangeHandler}
+            loading = {isFetchingAll}
+        />
         <div className={styles['card-list']}>
             <Card>
                 <h2 className={styles['card-title']}>Death</h2>

@@ -1,9 +1,10 @@
 import { useSelector } from 'react-redux';
 import styles from './Table.module.css'
 import TableHeader from './TableHeader/TableHeader';
+import Spinner from '../Spinner/Spinner'
 const Table = (props) =>{
     const activeLocale = useSelector(state => state.locale.activeLocaleKey)
-    const {list,onSortChange,onSearchQueryChange} = props;
+    const {list,onSortChange,onSearchQueryChange, loading} = props;
     const rows = list.map((element,index) => {
         return (
             <tr key={index}>
@@ -17,7 +18,8 @@ const Table = (props) =>{
 
     return <div className={styles.table}>
         <TableHeader onSortChange = {onSortChange} onSearchQueryChange = {onSearchQueryChange}/>
-        <table>
+        {loading && <Spinner />}
+        {!loading && <table>
             <tbody>
                 <tr className={styles.columns}>
                     <th>Country</th>
@@ -25,10 +27,11 @@ const Table = (props) =>{
                     <th>Death</th>
                     <th>Confirmed</th>
                 </tr>
-               {rows}
+                
+                {rows}
             </tbody>
             
-        </table>
+        </table>}
     </div>
 }
 export default Table;
