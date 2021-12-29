@@ -18,7 +18,9 @@ class StatisticController extends Controller
        $this->repository = $statisticRepository;
     }
     public function all(Request $request){
-        $data = $this->repository->all($request->input('sortColumn',null),$request->input('sortDirection','desc'));
+        $data = $this->repository->all($request->input('sortColumn',null),
+        $request->input('sortDirection','desc'),
+        $request->input('searchTerm',null));
         if($data){
             return $this->responseSuccessWithData(StatisticResource::collection($data)); 
         }
