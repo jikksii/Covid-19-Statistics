@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react";
+import { useCallback} from "react";
 import Header from "../../components/Header/Header";
 import Spinner from "../../components/Spinner/Spinner";
 import useHttp from "../../hooks/use-http";

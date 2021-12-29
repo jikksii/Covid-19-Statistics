@@ -5,28 +5,33 @@ import { useState } from "react"
 
 
 const columnsArray = [ "death","confirmed","recovered"];
-const orderArray = ["asc","desc"];
 
 
-const TableFilter = () =>{
+const TableFilter = (props) =>{
     const [active,setActive] = useState(false);
     const [activeColumn,setActiveColumn] = useState(null);
     const [activeOrder,setActiveOrder] = useState(null);
 
 
+    const {onSortChange} = props;
+
     const handleColumnChange = event =>{
         if(event.target.checked){
             setActiveColumn(event.target.name)
+            onSortChange(event.target.name,activeOrder)
         }else{
             setActiveColumn(null)
+            onSortChange(null,activeOrder)
         }
     }
 
     const handleOrderChange = event =>{
         if(event.target.checked){
             setActiveOrder(event.target.name)
+            onSortChange(activeColumn,event.target.name)
         }else{
             setActiveOrder(null)
+            onSortChange(activeColumn,null)
         }
     }
 

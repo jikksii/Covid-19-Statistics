@@ -9,6 +9,10 @@ const DashboardPage = () =>{
     const [summary,setSummary] = useState(null);
     const [tableData,setTableData] = useState([]);
 
+    const [sortColumn,setSortColumn] = useState(null);
+    const [sortDirection,setSortDirection] = useState(null);
+    const [searchTerm,setSearchTerm] = useState('');
+
 
     const handleError = useCallback(() => {
         
@@ -50,8 +54,32 @@ const DashboardPage = () =>{
     },[fetchSummary,fetchAll])
 
 
+    const sortChangeHandler =  (sortColumn,sortDirection)=>{
+
+        setSortColumn(sortColumn);
+        setSortDirection(sortDirection);
+    }
+
+
+    useEffect(() =>{
+        fetchAll({
+            url:'/statistic/all',
+            data : {
+                sortColumn,
+                sortDirection,
+                searchTerm
+            }
+        })
+    },[sortColumn,sortDirection,searchTerm,fetchAll])
+
+    const searchQueryChangeHandler = useCallback((query) => {
+        setSearchTerm(query)
+       
+    },[]);
+
+
     return <div className={styles.dashboard}>
-        <Table list = {tableData}/>
+        <Table list = {tableData} onSortChange = {sortChangeHandler} onSearchQueryChange = {searchQueryChangeHandler}/>
         <div className={styles['card-list']}>
             <Card>
                 <h2 className={styles['card-title']}>Death</h2>

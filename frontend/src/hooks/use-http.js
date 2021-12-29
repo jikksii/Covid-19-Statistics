@@ -13,7 +13,8 @@ const useHttp = (applyData , handleError) =>{
         axiosInstance({
             method: requestConfig.method ?requestConfig.method : 'GET',
             url: requestConfig.url,
-            data: requestConfig.data ? requestConfig.data : null
+            data: requestConfig.data && requestConfig.method !== 'GET' ? requestConfig.data : null,
+            params : requestConfig.method === 'GET' || !requestConfig.method ? requestConfig.data : null
         })
         .then(response => response.data)
         .then(data => {

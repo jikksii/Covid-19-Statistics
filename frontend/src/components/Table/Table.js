@@ -2,9 +2,7 @@ import styles from './Table.module.css'
 import TableHeader from './TableHeader/TableHeader';
 const Table = (props) =>{
 
-    const {list} = props;
-
-    console.log(list)
+    const {list,onSortChange,onSearchQueryChange} = props;
     const rows = list.map((element,index) => {
         return (
             <tr key={index}>
@@ -17,7 +15,7 @@ const Table = (props) =>{
     })
 
     return <div className={styles.table}>
-        <TableHeader/>
+        <TableHeader onSortChange = {onSortChange} onSearchQueryChange = {onSearchQueryChange}/>
         <table>
             <tbody>
                 <tr className={styles.columns}>
