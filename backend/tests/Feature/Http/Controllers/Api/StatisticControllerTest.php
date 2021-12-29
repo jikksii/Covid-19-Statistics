@@ -54,7 +54,9 @@ class StatisticControllerTest extends TestCase
                 ]);
                 $sorted =$this->sort($statistics,$sortColumn,$sortDir);
                 $responseData = $response->json('data');
-                $this->assertEquals(true,$this->equal($responseData,$sorted));
+
+                dump(collect($responseData));
+                $this->assertEquals(true,$this->equal(collect($responseData),$sorted));
             }
         }
 
@@ -109,7 +111,7 @@ class StatisticControllerTest extends TestCase
 
     private function equal(Collection $coll1 ,Collection $coll2){
         foreach($coll1 as  $key => $val){
-            if($val->id !== $coll2[$key]->id){
+            if($val['id'] !== $coll2[$key]['id']){
                 return false;
             }
         }
