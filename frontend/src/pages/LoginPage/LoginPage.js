@@ -25,6 +25,7 @@ const LoginPage = (props)=>{
     const handleSuccessAuth = useCallback( data =>{
         dispatch(authActions.setAuth(true))
         dispatch(authActions.setToken(data.data.token))
+        localStorage.setItem('token',data.data.token);
     },[dispatch]);
 
     const handleError = (error) => {

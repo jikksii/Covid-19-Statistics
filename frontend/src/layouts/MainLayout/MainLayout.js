@@ -22,7 +22,9 @@ const MainLayout = ({children}) => {
     },[]);
 
     const handleLogOutRequest = () => {
+        localStorage.removeItem('token');
         dispatch(authActions.setAuth(false));
+        dispatch(authActions.setToken(null));
         navigate('/login')
     }
 
