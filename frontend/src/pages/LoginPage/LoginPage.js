@@ -6,6 +6,7 @@ import useHttp from '../../hooks/use-http';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {authActions} from '../../store/auth'
+import axiosInstance from '../../utils/axiosInstance';
 const LoginPage = (props)=>{
     const [error,setError] = useState(false);
     const [errorMessage,setErrorMessage] = useState('Username or password is incorrect');
@@ -24,7 +25,7 @@ const LoginPage = (props)=>{
 
     const handleSuccessAuth = data =>{
         dispatch(authActions.setAuth(true))
-        dispatch(authActions.setToken(data.token))
+        dispatch(authActions.setToken(data.data.token))
     }
 
     const handleError = (error) => {
@@ -35,18 +36,21 @@ const LoginPage = (props)=>{
     const {sendRequest: login} = 
     useHttp({
         method : 'POST',
-        url : "/sss",
+        url : "/login",
         data : {
             username: username,
             password : password
         }
     },handleSuccessAuth,handleError)
 
+
+    
+
     const {
         sendRequest: register
     } = useHttp({
         method : 'POST',
-        url : "/test",
+        url : "/register",
         data : {
             username: username,
             password : password
@@ -71,6 +75,7 @@ const LoginPage = (props)=>{
     const registerClickHandler = () => {
         setError(false);
         register();
+        
     }
 
     return <div className={styles['login-page']}>

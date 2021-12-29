@@ -42,7 +42,6 @@ class StatisticRepository{
             ];
             return $result;
        }catch(Exception $e){
-           dump($e->getMessage());
            error_log($e->getMessage());
            return null;
        }

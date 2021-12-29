@@ -38,15 +38,11 @@ const MainLayout = ({children}) => {
     const {
         sendRequest: LogoutRequest,
     } = useHttp({
-        method : 'POST',
-        url : "/test",
+        method : 'PUT',
+        url : "/logout",
     },handleLogOutRequest,handleError)
+
     
-    useEffect(() =>{
-        getTestData()
-    },[])
-
-
     return (
         <div className={`${styles.MainLayout} ${isFetchingTestData && styles.Loading}` }>
             {isFetchingTestData && <Spinner/>}
