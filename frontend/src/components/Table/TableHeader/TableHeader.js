@@ -9,7 +9,6 @@ const TableHeader = (props)=>{
     return (
         <div className={styles.header}>
             <TableSearch onSearchQueryChange = {onSearchQueryChange}/>
-            <div className={styles.title}>Dashboard</div>
             <TableFilter onSortChange = {onSortChange}/>
         </div>
     )

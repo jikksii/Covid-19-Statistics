@@ -1,4 +1,4 @@
-import { useCallback} from "react";
+import { useCallback, useEffect} from "react";
 import Header from "../../components/Header/Header";
 import Spinner from "../../components/Spinner/Spinner";
 import useHttp from "../../hooks/use-http";
@@ -8,12 +8,12 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 import LanguageSelector from "../../components/LanguageSelector/LanguageSelector";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../../store/auth";
+import {localeActions} from  "../../store/locale"
 
 
 const MainLayout = ({children}) => {
-
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -21,6 +21,8 @@ const MainLayout = ({children}) => {
         
     },[]);
 
+
+    const literals = useSelector(state => state.locale.activeLiterals)
     const handleLogOutRequest = () => {
         localStorage.removeItem('token');
         dispatch(authActions.setAuth(false));
@@ -28,23 +30,40 @@ const MainLayout = ({children}) => {
         navigate('/login')
     }
 
+
+
+    const handleFetchLocale = useCallback(
+        (data) =>{
+           dispatch(localeActions.setAll(data.data))
+           dispatch(localeActions.setActiveLiterals("en"))
+        },
+    [dispatch]);
+
+    const {
+        sendRequest: fetchLocale,
+        isLoading  : isFetchingLocale
+    } = useHttp(handleFetchLocale,handleError)
     
 
 
-    
     const {
         sendRequest: LogoutRequest,
     } = useHttp(handleLogOutRequest,handleError)
 
-
+    
+    useEffect(()=>{
+        fetchLocale({
+            url:'/locale/all'
+        });
+    },[fetchLocale]);
     
 
 
 
     return (
-        <div className={`${styles.MainLayout} ${false && styles.Loading}` }>
-            {false && <Spinner/>}
-            {!false && 
+        <div className={`${styles.MainLayout} ${isFetchingLocale && styles.Loading}` }>
+            {isFetchingLocale && <Spinner/>}
+            {!isFetchingLocale && 
             <div className={styles.controller}>
                 <LanguageSelector/>
                 <FontAwesomeIcon 
@@ -56,8 +75,8 @@ const MainLayout = ({children}) => {
                             })} 
                 />
             </div>}
-            {!false &&<Header />}
-            {!false && children}
+            {!isFetchingLocale &&<Header />}
+            {!isFetchingLocale && literals && children}
         </div>
     )
 }

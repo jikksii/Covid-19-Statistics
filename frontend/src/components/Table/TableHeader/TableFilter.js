@@ -2,6 +2,7 @@ import styles from "./TableFilter.module.css"
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import { faFilter } from '@fortawesome/free-solid-svg-icons'
 import { useState } from "react"
+import { useSelector } from "react-redux";
 
 
 const columnsArray = [ "death","confirmed","recovered"];
@@ -11,6 +12,9 @@ const TableFilter = (props) =>{
     const [active,setActive] = useState(false);
     const [activeColumn,setActiveColumn] = useState(null);
     const [activeOrder,setActiveOrder] = useState(null);
+
+    const literals = useSelector(state => state.locale.activeLiterals)
+
 
 
     const {onSortChange} = props;
@@ -47,7 +51,7 @@ const TableFilter = (props) =>{
                         onChange={handleColumnChange}
                         checked = {value === activeColumn}
                     />
-                    <label htmlFor={value}>{value}</label>
+                    <label htmlFor={value}>{literals[value]}</label>
                 </div>
     })
     return (
@@ -66,7 +70,7 @@ const TableFilter = (props) =>{
                         onChange={handleOrderChange}
                         checked ={activeOrder === "asc"}
                     />
-                        <label htmlFor="horns">Ascending</label>
+                        <label htmlFor="horns">{literals.ascending}</label>
                     </div>
                     <div>
                         <input 
@@ -77,7 +81,7 @@ const TableFilter = (props) =>{
                             onChange={handleOrderChange}
                             checked ={activeOrder === "desc"}
                         />
-                        <label htmlFor="horns">Descending</label>
+                        <label htmlFor="horns">{literals.descending}</label>
                     </div>
                 </div>
                 

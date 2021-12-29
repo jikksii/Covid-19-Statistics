@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import Card from '../../components/Card/Card';
 import Spinner from '../../components/Spinner/Spinner';
 import Table from '../../components/Table/Table';
@@ -12,7 +13,7 @@ const DashboardPage = () =>{
     const [sortColumn,setSortColumn] = useState(null);
     const [sortDirection,setSortDirection] = useState(null);
     const [searchTerm,setSearchTerm] = useState('');
-
+    const literals = useSelector(state => state.locale.activeLiterals)
 
     const handleError = useCallback(() => {
         
@@ -87,21 +88,21 @@ const DashboardPage = () =>{
         />
         <div className={styles['card-list']}>
             <Card>
-                <h2 className={styles['card-title']}>Death</h2>
+                <h2 className={styles['card-title']}>{literals.death}</h2>
                 <div className={styles['card-number']}>
                     {isFetchingSummary && <Spinner />}
                     {!isFetchingSummary && summary &&  summary.death}
                 </div>
             </Card>
             <Card>
-                <h2 className={styles['card-title']}>Recoveries</h2>
+                <h2 className={styles['card-title']}>{literals.recovered}</h2>
                 <div className={styles['card-number']}>
                     {isFetchingSummary && <Spinner />}
                     {!isFetchingSummary && summary && summary.recovered}
                 </div>
             </Card>
             <Card>
-                <h2 className={styles['card-title']}>Confirmeds</h2>
+                <h2 className={styles['card-title']}>{literals.confirmed}</h2>
                 <div className={styles['card-number']}>
                     {isFetchingSummary && <Spinner />}
                     {!isFetchingSummary && summary &&  summary.confirmed}

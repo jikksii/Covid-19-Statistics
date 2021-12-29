@@ -1,7 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit'
 const initialState = {
     activeLocaleKey : "en",
-    activeLocaleObject : null,
+    activeLiterals : null,
     allLocales : null
 }
 const slice = createSlice({
@@ -10,10 +10,17 @@ const slice = createSlice({
     reducers :{
         setActiveLocale(state,action){
             state.activeLocaleKey = action.payload
-            state.activeLocaleObject = state.all[action.payload]
+        },
+        setActiveLiterals(state,action){
+            state.allLocales.forEach(element => {
+                if(element.code === action.payload){
+                    state.activeLiterals = element.literals
+                    return;
+                }
+            });
         },
         setAll(state,action){
-            state.all = action.payload
+            state.allLocales = action.payload
         }
     }
 })

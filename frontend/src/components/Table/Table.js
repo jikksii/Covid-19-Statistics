@@ -5,6 +5,8 @@ import Spinner from '../Spinner/Spinner'
 const Table = (props) =>{
     const activeLocale = useSelector(state => state.locale.activeLocaleKey)
     const {list,onSortChange,onSearchQueryChange, loading} = props;
+
+    const literals = useSelector(state => state.locale.activeLiterals)
     const rows = list.map((element,index) => {
         return (
             <tr key={index}>
@@ -22,10 +24,10 @@ const Table = (props) =>{
         {!loading && <table>
             <tbody>
                 <tr className={styles.columns}>
-                    <th>Country</th>
-                    <th>Recovered</th>
-                    <th>Death</th>
-                    <th>Confirmed</th>
+                    <th>{literals.country}</th>
+                    <th>{literals.recovered}</th>
+                    <th>{literals.death}</th>
+                    <th>{literals.confirmed}</th>
                 </tr>
                 
                 {rows}
