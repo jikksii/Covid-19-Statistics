@@ -21,4 +21,9 @@ class Locale extends Model
      * @var array
      */
     protected $fillable = ['code','description'];
+
+
+    public function literals(){
+        return $this->hasMany(Literal::class);
+    }
 }

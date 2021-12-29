@@ -1,9 +1,9 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
-use App\Http\Controllers\Api\LiteralController;
 use App\Http\Controllers\Api\StatisticController;
 use App\Http\Api\CovidApi;
+use App\Http\Controllers\Api\LocaleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -56,7 +56,7 @@ Route::middleware('auth:sanctum')->group(function(){
         Route::get('/summary',[StatisticController::class,'summary']);
     });
 
-    Route::prefix('/literal')->group(function(){
-        Route::get('/',[LiteralController::class,'all']);
+    Route::prefix('/locale')->group(function(){
+        Route::get('/all',[LocaleController::class,'all']);
     });
 });
