@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\StatisticResource;
 use App\Http\Traits\ResponseTrait;
 use App\Repositories\StatisticRepository;
 use Illuminate\Http\Request;
@@ -19,7 +20,7 @@ class StatisticController extends Controller
     public function all(Request $request){
         $data = $this->repository->all($request->input('sortColumn',null),$request->input('sortDirection','desc'));
         if($data){
-            return $this->responseSuccessWithData($data); 
+            return $this->responseSuccessWithData(StatisticResource::collection($data)); 
         }
         return $this->responseServiceUnavailable();
         

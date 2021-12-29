@@ -1,6 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit'
 const initialState = {
-    activeLocaleKey : "",
+    activeLocaleKey : "en",
     activeLocaleObject : null,
     allLocales : null
 }

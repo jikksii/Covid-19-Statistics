@@ -1,12 +1,13 @@
+import { useSelector } from 'react-redux';
 import styles from './Table.module.css'
 import TableHeader from './TableHeader/TableHeader';
 const Table = (props) =>{
-
+    const activeLocale = useSelector(state => state.locale.activeLocaleKey)
     const {list,onSortChange,onSearchQueryChange} = props;
     const rows = list.map((element,index) => {
         return (
             <tr key={index}>
-                <td>{element.country_id}</td>
+                <td>{element.country.name[activeLocale]}</td>
                 <td>{element.recovered}</td>
                 <td>{element.death}</td>
                 <td>{element.confirmed}</td>

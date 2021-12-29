@@ -22,4 +22,9 @@ class Statistic extends Model
      * @var array
      */
     protected $fillable = ['country_id','confirmed','recovered','death'];
+
+
+    public function country(){
+        return $this->belongsTo(Country::class);
+    }
 }
