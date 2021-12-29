@@ -6,6 +6,7 @@ use App\Models\Statistic;
 use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class StatisticRepository{
     private $statisticModel;
@@ -24,6 +25,26 @@ class StatisticRepository{
             return $all;
         }catch(Exception $e){
             error_log($e->getMessage());
+            return null;
         }
+   }
+
+
+   public function summary(){
+       try{
+            $queryResult = $this->statisticModel->query()
+            ->getQuery()
+            ->selectRaw("SUM(confirmed) as confirmed,SUM(recovered) as recovered , SUM(death) as death")->first();
+            $result = [
+                'confirmed' => intval($queryResult->confirmed),
+                'recovered' => intval($queryResult->recovered),
+                'death' => intval($queryResult->death),
+            ];
+            return $result;
+       }catch(Exception $e){
+           dump($e->getMessage());
+           error_log($e->getMessage());
+           return null;
+       }
    }
 }

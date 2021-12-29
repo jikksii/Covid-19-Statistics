@@ -54,8 +54,6 @@ class StatisticControllerTest extends TestCase
                 ]);
                 $sorted =$this->sort($statistics,$sortColumn,$sortDir);
                 $responseData = $response->json('data');
-
-                dump(collect($responseData));
                 $this->assertEquals(true,$this->equal(collect($responseData),$sorted));
             }
         }
@@ -70,7 +68,18 @@ class StatisticControllerTest extends TestCase
     }
 
     public function test_summary_route_valid_data(){
-        $response = $this->get('api/statistic/summary',['Accept' => 'application/json']);
+        $this->withoutExceptionHandling();
+        $count = 30;
+        $statistics = $this->create_statistics($count);
+        $user = User::factory()->create();
+        $token = $user->createToken('test')->plainTextToken;
+        
+        $response = $this->get('api/statistic/summary',[
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer '. $token,
+        ]);
+
+        $response->assertStatus(200);
         $response->assertJsonStructure([
             'data' => [
                 'confirmed',
@@ -78,13 +87,15 @@ class StatisticControllerTest extends TestCase
                 'death'
             ]
         ]);
-
-        $count = 30;
-        $statistics = $this->create_statistics($count);
         $response = $this->get('api/statistic/summary',['Accept' => 'application/json']);
 
-
-        $summary = $statistics->sum(['confirmed','recovered','death']);
+        $summary = $statistics->pipe(function ($collection) {
+            return [
+                'confirmed' => $collection->sum('confirmed'),
+                'recovered' => $collection->sum('recovered'),
+                'death' => $collection->sum('death'),
+            ];
+        });
         $ResponseData = $response->json('data');
 
 

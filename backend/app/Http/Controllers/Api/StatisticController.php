@@ -18,12 +18,20 @@ class StatisticController extends Controller
     }
     public function all(Request $request){
         $data = $this->repository->all($request->input('sortColumn',null),$request->input('sortDirection',null));
-        return $this->responseSuccessWithData($data); 
+        if($data){
+            return $this->responseSuccessWithData($data); 
+        }
+        return $this->responseServiceUnavailable();
+        
     }
 
 
     public function summary(Request $request){
-
+        $data = $this->repository->summary();
+        if($data){
+            return $this->responseSuccessWithData($data); 
+        }
+        return $this->responseServiceUnavailable();
     }
 }
 
