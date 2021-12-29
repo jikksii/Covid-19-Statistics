@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import Header from "../../components/Header/Header";
 import Spinner from "../../components/Spinner/Spinner";
 import useHttp from "../../hooks/use-http";
@@ -16,43 +16,46 @@ const MainLayout = ({children}) => {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    
-    const handleFetchTestData = data =>{
-        console.log(data);
-    }
 
-    const handleError = () => {
+    const handleError = useCallback(() => {
         
-    }
+    },[]);
 
     const handleLogOutRequest = () => {
         dispatch(authActions.setAuth(false));
         navigate('/login')
     }
 
-    const {
-        sendRequest: getTestData,
-        isLoading : isFetchingTestData
-    } = useHttp({url : "/test",},handleFetchTestData,handleError)
+    
+
+
     
     const {
         sendRequest: LogoutRequest,
-    } = useHttp({
-        method : 'PUT',
-        url : "/logout",
-    },handleLogOutRequest,handleError)
+    } = useHttp(handleLogOutRequest,handleError)
+
 
     
+
+
+
     return (
-        <div className={`${styles.MainLayout} ${isFetchingTestData && styles.Loading}` }>
-            {isFetchingTestData && <Spinner/>}
-            {!isFetchingTestData && 
+        <div className={`${styles.MainLayout} ${false && styles.Loading}` }>
+            {false && <Spinner/>}
+            {!false && 
             <div className={styles.controller}>
                 <LanguageSelector/>
-                <FontAwesomeIcon className={styles['controller-auth']} icon={faSignOutAlt} onClick={LogoutRequest} />
+                <FontAwesomeIcon 
+                className={styles['controller-auth']} 
+                icon={faSignOutAlt} 
+                onClick={() => LogoutRequest({
+                                method : 'PUT',
+                                url : "/logout",
+                            })} 
+                />
             </div>}
-            {!isFetchingTestData &&<Header />}
-            {!isFetchingTestData && children}
+            {!false &&<Header />}
+            {!false && children}
         </div>
     )
 }

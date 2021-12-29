@@ -1,14 +1,14 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useSelector } from "react-redux";
 import axiosInstance from "../utils/axiosInstance";
-const useHttp = (requestConfig,applyData , handleError) =>{
+const useHttp = (applyData , handleError) =>{
     const [isLoading,setIsLoading] = useState(false);
     const isAuth = useSelector(state => state.auth.isAuth)
     const token = useSelector(state => state.auth.token)
     if(isAuth){
         axiosInstance.defaults.headers.Authorization =  'Bearer ' + token;
     }
-    const sendRequest = async () => {
+    const sendRequest =  useCallback(async (requestConfig) => {
         setIsLoading(true);
         axiosInstance({
             method: requestConfig.method ?requestConfig.method : 'GET',
@@ -24,7 +24,7 @@ const useHttp = (requestConfig,applyData , handleError) =>{
             handleError(err)
         })
         
-    }
+    },[applyData,handleError]);
    
     return {
         isLoading ,sendRequest

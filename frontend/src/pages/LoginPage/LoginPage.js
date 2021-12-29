@@ -1,12 +1,11 @@
 import Input from '../../components/Input/Input';
 import styles from './LoginPage.module.css'
 import { faUser, faKey } from '@fortawesome/free-solid-svg-icons'
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import useHttp from '../../hooks/use-http';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {authActions} from '../../store/auth'
-import axiosInstance from '../../utils/axiosInstance';
 const LoginPage = (props)=>{
     const [error,setError] = useState(false);
     const [errorMessage,setErrorMessage] = useState('Username or password is incorrect');
@@ -21,41 +20,26 @@ const LoginPage = (props)=>{
         if(isAuth){
             navigate('/')
         }
-    },[isAuth])
+    },[isAuth,navigate])
 
-    const handleSuccessAuth = data =>{
+    const handleSuccessAuth = useCallback( data =>{
         dispatch(authActions.setAuth(true))
         dispatch(authActions.setToken(data.data.token))
-    }
+    },[dispatch]);
 
     const handleError = (error) => {
         setError(true);
     }
 
     
-    const {sendRequest: login} = 
-    useHttp({
-        method : 'POST',
-        url : "/login",
-        data : {
-            username: username,
-            password : password
-        }
-    },handleSuccessAuth,handleError)
+    const {sendRequest: login} = useHttp(handleSuccessAuth,handleError)
 
 
     
 
     const {
         sendRequest: register
-    } = useHttp({
-        method : 'POST',
-        url : "/register",
-        data : {
-            username: username,
-            password : password
-        }
-    },handleSuccessAuth,handleError)
+    } = useHttp(handleSuccessAuth,handleError)
 
 
 
@@ -69,12 +53,26 @@ const LoginPage = (props)=>{
 
     const loginClickHandler = ()=>{
         setError(false);
-        login();
+        login({
+            method : 'POST',
+            url : "/login",
+            data : {
+                username: username,
+                password : password
+            }
+        });
     }
 
     const registerClickHandler = () => {
         setError(false);
-        register();
+        register({
+            method : 'POST',
+            url : "/register",
+            data : {
+                username: username,
+                password : password
+            }
+        });
         
     }
 

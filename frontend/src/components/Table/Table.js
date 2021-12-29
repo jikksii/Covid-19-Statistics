@@ -1,50 +1,14 @@
 import styles from './Table.module.css'
 import TableHeader from './TableHeader/TableHeader';
-const Table = () =>{
+const Table = (props) =>{
 
-    let list = [
-        {
-            country : "Georgia",
-            recovered : 18,
-            death : 1,
-            confirmed : 10
-        },
-        {
-            country : "Georgia",
-            recovered : 18,
-            death : 1,
-            confirmed : 10
-        },
-        {
-            country : "Georgia",
-            recovered : 18,
-            death : 1,
-            confirmed : 10
-        },
-        {
-            country : "Georgia",
-            recovered : 18,
-            death : 1,
-            confirmed : 10
-        },
-        {
-            country : "Georgia",
-            recovered : 18,
-            death : 1,
-            confirmed : 10
-        },
-        {
-            country : "Georgia",
-            recovered : 18,
-            death : 1,
-            confirmed : 10
-        }
-    ]
+    const {list} = props;
 
+    console.log(list)
     const rows = list.map((element,index) => {
         return (
             <tr key={index}>
-                <td>{element.country}</td>
+                <td>{element.country_id}</td>
                 <td>{element.recovered}</td>
                 <td>{element.death}</td>
                 <td>{element.confirmed}</td>
