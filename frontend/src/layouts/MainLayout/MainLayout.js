@@ -63,7 +63,7 @@ const MainLayout = ({children}) => {
     return (
         <div className={`${styles.MainLayout} ${isFetchingLocale && styles.Loading}` }>
             {isFetchingLocale && <Spinner/>}
-            {!isFetchingLocale && 
+            {!isFetchingLocale  && literals && 
             <div className={styles.controller}>
                 <LanguageSelector/>
                 <FontAwesomeIcon 
@@ -75,7 +75,7 @@ const MainLayout = ({children}) => {
                             })} 
                 />
             </div>}
-            {!isFetchingLocale &&<Header />}
+            {!isFetchingLocale && literals &&<Header />}
             {!isFetchingLocale && literals && children}
         </div>
     )

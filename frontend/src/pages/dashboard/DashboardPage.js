@@ -44,15 +44,11 @@ const DashboardPage = () =>{
 
 
 
-    useEffect(() => {
+    useEffect(()=>{
         fetchSummary({
             url : "/statistic/summary",
         })
-        fetchAll({
-            url:'/statistic/all'
-        })
-        
-    },[fetchSummary,fetchAll])
+    },[fetchSummary])
 
 
     const sortChangeHandler =  (sortColumn,sortDirection)=>{

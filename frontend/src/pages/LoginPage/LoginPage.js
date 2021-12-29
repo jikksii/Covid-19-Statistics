@@ -13,19 +13,21 @@ const LoginPage = (props)=>{
     const [password,setPassword] = useState('');
     const navigate = useNavigate();
     const isAuth = useSelector(state => state.auth.isAuth)
+    const token = useSelector(state => state.auth.token)
     const dispatch = useDispatch()
 
 
     useEffect(() => {
-        if(isAuth){
+        if(isAuth && token){
             navigate('/')
         }
-    },[isAuth,navigate])
+    },[isAuth,navigate,token])
 
     const handleSuccessAuth = useCallback( data =>{
-        dispatch(authActions.setAuth(true))
-        dispatch(authActions.setToken(data.data.token))
         localStorage.setItem('token',data.data.token);
+        dispatch(authActions.setToken(data.data.token))
+        dispatch(authActions.setAuth(true))
+        
     },[dispatch]);
 
     const handleError = (error) => {
