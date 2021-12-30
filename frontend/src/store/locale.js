@@ -21,6 +21,11 @@ const slice = createSlice({
         },
         setAll(state,action){
             state.allLocales = action.payload
+        },
+        reset(state,action){
+            state.activeLocaleKey =initialState.activeLocaleKey
+            state.allLocales = initialState.allLocales
+            state.activeLiterals = initialState.activeLiterals
         }
     }
 })

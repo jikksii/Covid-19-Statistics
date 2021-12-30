@@ -27,6 +27,7 @@ const MainLayout = ({children}) => {
         localStorage.removeItem('token');
         dispatch(authActions.setAuth(false));
         dispatch(authActions.setToken(null));
+        dispatch(localeActions.reset())
         navigate('/login')
     }
 
@@ -56,10 +57,7 @@ const MainLayout = ({children}) => {
             url:'/locale/all'
         });
     },[fetchLocale]);
-    
-
-
-
+      
     return (
         <div className={`${styles.MainLayout} ${isFetchingLocale && styles.Loading}` }>
             {isFetchingLocale && <Spinner/>}
