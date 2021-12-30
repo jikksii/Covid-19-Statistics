@@ -12,11 +12,11 @@ const DashboardPage = () =>{
 
     const [sortColumn,setSortColumn] = useState(null);
     const [sortDirection,setSortDirection] = useState(null);
-    const [searchTerm,setSearchTerm] = useState('');
+    const [searchTerm, setSearchTerm] = useState(null);
     const literals = useSelector(state => state.locale.activeLiterals)
 
     const handleError = useCallback(() => {
-        
+
     },[]);
 
     const hadnleFetchSummary = useCallback(
@@ -44,13 +44,6 @@ const DashboardPage = () =>{
 
 
 
-    useEffect(()=>{
-        fetchSummary({
-            url : "/statistic/summary",
-        })
-    },[fetchSummary])
-
-
     const sortChangeHandler =  (sortColumn,sortDirection)=>{
 
         setSortColumn(sortColumn);
@@ -59,26 +52,30 @@ const DashboardPage = () =>{
 
 
     useEffect(() =>{
-        fetchAll({
-            url:'/statistic/all',
-            data : {
-                sortColumn,
-                sortDirection,
-                searchTerm
-            }
+        fetchSummary({
+            url: "/statistic/summary",
+        }).then(r => {
+            fetchAll({
+                url: '/statistic/all',
+                data: {
+                    sortColumn,
+                    sortDirection,
+                    searchTerm
+                }
+            }).then(r => {})
         })
-    },[sortColumn,sortDirection,searchTerm,fetchAll])
+    },[fetchSummary, sortColumn,sortDirection,searchTerm,fetchAll])
 
     const searchQueryChangeHandler = useCallback((query) => {
         setSearchTerm(query)
-       
+
     },[]);
 
 
     return <div className={styles.dashboard}>
-        <Table 
-            list = {tableData} 
-            onSortChange = {sortChangeHandler} 
+        <Table
+            list = {tableData}
+            onSortChange = {sortChangeHandler}
             onSearchQueryChange = {searchQueryChangeHandler}
             loading = {isFetchingAll}
         />
