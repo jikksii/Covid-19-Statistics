@@ -51,20 +51,24 @@ const DashboardPage = () =>{
     }
 
 
+    useEffect(()=>{
+        fetchAll({
+            url: '/statistic/all',
+            data: {
+                sortColumn,
+                sortDirection,
+                searchTerm
+            }
+        }).then(r => {})
+    },[fetchAll,sortColumn,sortDirection,searchTerm])
+
     useEffect(() =>{
         fetchSummary({
             url: "/statistic/summary",
         }).then(r => {
-            fetchAll({
-                url: '/statistic/all',
-                data: {
-                    sortColumn,
-                    sortDirection,
-                    searchTerm
-                }
-            }).then(r => {})
+            
         })
-    },[fetchSummary, sortColumn,sortDirection,searchTerm,fetchAll])
+    },[fetchSummary])
 
     const searchQueryChangeHandler = useCallback((query) => {
         setSearchTerm(query)
